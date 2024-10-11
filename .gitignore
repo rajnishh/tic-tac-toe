@@ -1,0 +1,22 @@
+# Node.js
+node_modules/
+yarn.lock
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+
+# React/React Native
+build/
+.expo/
+.next/
+
+# Environment variables
+.env
+
+.DS_Store
+.idea/
+api/node-api/package-lock.json
+api/node-api/combined.log
+package-lock.json

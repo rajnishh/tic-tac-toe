@@ -1,0 +1,236 @@
+openapi: 3.0.0
+info:
+  title: Tic Tac Toe API
+  description: API for Tic Tac Toe game including authentication and game management
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Local server
+paths:
+  /register:
+    post:
+      summary: Register a new user
+      operationId: registerUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: user@example.com
+                password:
+                  type: string
+                  format: password
+                  example: securepassword
+      responses:
+        '201':
+          description: User successfully registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: jwt_token
+        '400':
+          description: Invalid input data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          example: Please provide a valid email
+
+  /login:
+    post:
+      summary: Login an existing user
+      operationId: loginUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: user@example.com
+                password:
+                  type: string
+                  format: password
+                  example: securepassword
+      responses:
+        '200':
+          description: User successfully logged in
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: jwt_token
+        '400':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Invalid credentials
+
+  /move:
+    post:
+      summary: Make a move in the game
+      operationId: startGame
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                board:
+                  type: array
+                  items:
+                    type: array
+                    items:
+                      type: string
+                  example: [[null, "X", "O"], [null, "X", null], [null, null, "O"]]
+                player:
+                  type: string
+                  enum: ["X", "O"]
+                  example: "X"
+      responses:
+        '200':
+          description: Successful move
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next_move:
+                    type: array
+                    items:
+                      type: integer
+                    example: [0, 1]
+                  status:
+                    type: string
+                    example: ongoing
+                  board:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: string
+        '400':
+          description: Invalid input data or no valid moves left
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: No valid moves left
+
+  /stats:
+    post:
+      summary: Update user stats
+      operationId: updateStats
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                result:
+                  type: string
+                  enum: ["win", "lose", "draw"]
+                  example: "win"
+      responses:
+        '200':
+          description: Stats successfully updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Stats updated
+        '400':
+          description: Invalid result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          example: Result must be "win", "lose" or "draw"
+
+    get:
+      summary: Get user stats
+      operationId: getStats
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful retrieval of user stats
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  wins:
+                    type: integer
+                    example: 10
+                  losses:
+                    type: integer
+                    example: 5
+                  draws:
+                    type: integer
+                    example: 3
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User not found
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

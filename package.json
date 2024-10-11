@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "workspaces": [
+    "packages/web-app",
+    "packages/mobile-app",
+    "packages/common"
+  ],
+  "dependencies": {
+    "swagger-ui-express": "^5.0.1",
+    "yamljs": "^0.3.0"
+  }
+}
