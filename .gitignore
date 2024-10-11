@@ -24,3 +24,4 @@ mobile-app/.yarn/
 /mobile-app/__tests__
 /mobile-app/android/.gradle
 /mobile-app/vendor/bundle
+/.yarn

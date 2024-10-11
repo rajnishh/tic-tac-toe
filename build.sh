@@ -19,8 +19,8 @@ echo "Building React web app..."
 cd ../../web-app
 yarn install
 
-# echo "Building React Native mobile app..."
-# cd ../mobile-app
-# yarn install
+echo "Building React Native mobile app..."
+cd ../mobile-app
+yarn install
 
 echo "All components have been built successfully."
