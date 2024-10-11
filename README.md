@@ -79,6 +79,8 @@ To install the necessary dependencies for each component, run the build.sh:
 1. **Install Python dependencies for the engine**:
    ```bash
    cd api/python-engine
+   python3 -m venv venv
+   source venv/bin/activate 
    pip install -r requirements.txt
    ```
 
@@ -114,6 +116,7 @@ or run the application by individual commands:
 1. **Start the Python engine**:
    ```bash
    cd api/python-engine
+   source venv/bin/activate  # Activate virtual environment
    uvicorn main:app --host 0.0.0.0 --port 8000
    ```
 
@@ -138,16 +141,6 @@ or run the application by individual commands:
 - **Game Play**: Users can choose to play against the computer or another player.
 - **Game Statistics**: Track wins, losses, and draws for each user.
 - **Responsive Interfaces**: Built using React for the web and React Native for mobile.
-
-## Bonus Task
-
-- Implement JWT-based authentication in both the React and React Native apps, ensuring secure communication between the frontend and backend.
-
-## Submission Guidelines
-
-- Code must be well-structured, documented, and follow industry best practices.
-- Provide the modified Python engine, Node.js server, React web app, and React Native app, along with instructions to run each.
-- Provide explanations of design decisions, such as the database choice and API architecture.
 
 ## License
 
