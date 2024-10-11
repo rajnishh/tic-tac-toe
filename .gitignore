@@ -20,3 +20,7 @@ build/
 api/node-api/package-lock.json
 api/node-api/combined.log
 package-lock.json
+mobile/.yarn/
+/mobile/__tests__
+/mobile/android/.gradle
+/mobile/vendor/bundle
