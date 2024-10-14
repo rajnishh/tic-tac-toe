@@ -156,7 +156,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ![Login Screen](./screenshots/user_login.png)
 
 ### 3. Game Screen
-![Game Screen](./screenshots/game-board.png)
+![Game Screen](./screenshots/game_board.png)
 
 ### 4. Move Screen
 ![Stats Screen](./screenshots/move.png)
